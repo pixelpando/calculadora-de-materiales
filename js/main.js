@@ -3,42 +3,56 @@ console.warn("Los datos ofrecidos son de referencia y pueden no ser exactos.\n L
 //Bolsa de 50 kg.
 let cemento = 50;
 
-//Coeficiente de desperdicio
+//Coeficiente de desperdicio (5%)
 let desperdicio = 1.05;
 
-//Espesor default del mortero en mts.
+//Espesor del mortero en mts.
 let junta = 0.015;
 
 const ladrillos = ['Ladrillos Comunes 5x13x25', 'Ladrillos Huecos 6 agujeros 12x18x25', 'Ladrillos Huecos 9 agujeros 18x18x25']
 
-//Medidas default ladrillo 1 común en mts.
+//Medidas de referencia ladrillo común en mts.
 // let altoLadrillo = 0.05;
 // let anchoLadrillo = 0.13;
 // let largoLadrillo = 0.25;
 
 //Funciones
 function calcularLadrillos(altoLadrillo, anchoLadrillo, largoLadrillo, ladrilloNombre) {
-    let longitudPared = parseFloat(prompt('Longitud de la pared en mts. (Ej: 4.2):'));
-    let alturaPared = parseFloat(prompt('Altura de la pared en mts. (Ej: 2.5):'));
-    
-    let resultadoPared = Math.round(longitudPared * alturaPared);
+    let longitudPared = parseFloat(prompt('Longitud de todas las paredes en mts. (Ej: 4.2):'));
+    let alturaPared = parseFloat(prompt('Altura de paredes en mts. (Ej: 2.5):'));
+    console.log('********** Desglose de valores **************');
+
+    let resultadoPared = longitudPared * alturaPared;
     console.log('Pared: '+resultadoPared+ ' m2');
 
     let ladrilloMortero = ((largoLadrillo + junta) * (altoLadrillo + junta));
     console.log('Superficie del ladrillo: '+ladrilloMortero+ ' mts.');
 
-    let ladrillosCantidad = Math.round(resultadoPared / ladrilloMortero * desperdicio);
+    let ladrillosCantidad = resultadoPared / ladrilloMortero * desperdicio;
     console.log('Cantidad de ladrillos: '+ladrillosCantidad+' unid.');
 
-    let cementoBolsas = Math.round((ladrillosCantidad / 3) / cemento);
+    // let cementoBolsas = Math.round((ladrillosCantidad / 3) / cemento);
+    let juntaSuperior = junta * largoLadrillo * anchoLadrillo;
+    let juntaLateral = junta * altoLadrillo * anchoLadrillo;
+    let juntaTotal = (juntaSuperior + juntaLateral) * ladrillosCantidad;
+    console.log('Junta total: ' +juntaTotal+ ' m3');
+
+    //Relacion 1:3 - 454 Kg./m3 de cemento
+    let dosificacionMortero = 454;
+    let cementoBolsas = dosificacionMortero * juntaTotal * desperdicio / cemento;
+    console.log('Bolsas de cemento: ' +cementoBolsas+ ' unid.');
     
-    if (cementoBolsas > 0, cementoBolsas <= 1.4999) {
-        cementoBolsas = 1;
+    if (cementoBolsas > 0, cementoBolsas <= 1) {
+        // cementoBolsas = 1;
         txtBolsa = 'bolsa';
     } else {
         txtBolsa = 'bolsas';
     }
-    console.log('Bolsas de cemento: ' +cementoBolsas+ ' unid.');
+
+    //Redondeo de valores
+    resultadoPared = Math.round(resultadoPared);
+    ladrillosCantidad = Math.round(ladrillosCantidad);
+    cementoBolsas = Math.ceil(cementoBolsas);
     
     alert('La superficie de su pared será de apróximadamente '+resultadoPared+' m2. \nNecesitará: \n- '+ladrillosCantidad+' '+ladrilloNombre+'.\n- '+cementoBolsas+' '+txtBolsa+' de cemento de 50 kg.');
 }
@@ -93,4 +107,4 @@ while (productoElegido !== 5) {
     productoElegido = parseInt(prompt(textoPrompt));
 }
 
-alert('¡Gracias por usar nuestros servicios!');
+alert('¡Gracias por utilizar nuestros servicios!');
