@@ -22,13 +22,13 @@ function calcularLadrillos(altoLadrillo, anchoLadrillo, largoLadrillo, ladrilloN
     let alturaPared = parseFloat(prompt('Altura de la pared en mts. (Ej: 2.5):'));
     
     let resultadoPared = Math.round(longitudPared * alturaPared);
-    console.log(resultadoPared);
+    console.log('Pared: '+resultadoPared+ ' m2');
 
     let ladrilloMortero = ((largoLadrillo + junta) * (altoLadrillo + junta));
-    console.log(ladrilloMortero);
+    console.log('Superficie del ladrillo: '+ladrilloMortero+ ' mts.');
 
     let ladrillosCantidad = Math.round(resultadoPared / ladrilloMortero * desperdicio);
-    console.log(ladrillosCantidad);
+    console.log('Cantidad de ladrillos: '+ladrillosCantidad+' unid.');
 
     let cementoBolsas = Math.round((ladrillosCantidad / 3) / cemento);
     
@@ -38,16 +38,41 @@ function calcularLadrillos(altoLadrillo, anchoLadrillo, largoLadrillo, ladrilloN
     } else {
         txtBolsa = 'bolsas';
     }
-    console.log(cementoBolsas);
+    console.log('Bolsas de cemento: ' +cementoBolsas+ ' unid.');
     
-    alert('La superficie de su pared será de apróximadamente '+resultadoPared+' m2. \nNecesitará: \n- '+ladrillosCantidad+' '+ladrilloNombre+' para construir toda la pared.\n- '+cementoBolsas+' '+txtBolsa+' de cemento de 50 kg.');
+    alert('La superficie de su pared será de apróximadamente '+resultadoPared+' m2. \nNecesitará: \n- '+ladrillosCantidad+' '+ladrilloNombre+'.\n- '+cementoBolsas+' '+txtBolsa+' de cemento de 50 kg.');
 }
 
+const cemento1 = {
+    marca: 'Loma Negra',
+    tipo: 'Cemento Portland',
+    presentacion: 'Bolsa de 50 kg.'
+}
 
-const textoPrompt = 'Que tipo de ladrillos desea llevar: \n(1) '+ladrillos[0]+' \n(2) '+ladrillos[1]+' \n(3) '+ladrillos[2]+' \n(4) Salir';
+const cemento2 = {
+    marca: 'Loma Negra',
+    tipo: 'Cemento de Albañileria',
+    presentacion: 'Bolsa de 40 kg.'
+}
+
+const cemento3 = {
+    marca: 'Avellaneda',
+    tipo: 'Cemento Portland',
+    presentacion: 'Bolsa de 50 kg.'
+}
+
+const verCementos = () => {
+    const bolsasCemento = [cemento1, cemento2, cemento3];
+    console.log(bolsasCemento);
+    for (const bolsaCemento of bolsasCemento) {
+        console.table(bolsaCemento)
+    }
+}
+
+const textoPrompt = 'Que tipo de ladrillos desea llevar: \n(1) '+ladrillos[0]+' \n(2) '+ladrillos[1]+' \n(3) '+ladrillos[2]+' \n(4) Ver lista de Cementos \n(5) Salir';
 let productoElegido = parseInt(prompt(textoPrompt));
 
-while (productoElegido !== 4) {
+while (productoElegido !== 5) {
     switch(productoElegido) {
         case 1:
             calcularLadrillos(0.05, 0.13, 0.25, ladrillos[0]);
@@ -58,10 +83,13 @@ while (productoElegido !== 4) {
         case 3:
             calcularLadrillos(0.18, 0.18, 0.25, ladrillos[2]);
             break;
+        case 4:
+            verCementos();
+            alert('El listado con los cementos se verá en consola.');
+            break;
         default:
-            alert('Selecciones una opción del (1) al (3). \nPara salir elija el (4).');
+            alert('Selecciones una opción del (1) al (4). \nPara salir elija el (5).');
     }
-
     productoElegido = parseInt(prompt(textoPrompt));
 }
 
