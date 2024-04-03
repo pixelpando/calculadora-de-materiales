@@ -86,25 +86,25 @@ const verCementos = () => {
 const textoPrompt = 'Que tipo de ladrillos desea llevar: \n(1) '+ladrillos[0]+' \n(2) '+ladrillos[1]+' \n(3) '+ladrillos[2]+' \n(4) Ver lista de Cementos \n(5) Salir';
 let productoElegido = parseInt(prompt(textoPrompt));
 
-while (productoElegido !== 5) {
-    switch(productoElegido) {
-        case 1:
-            calcularLadrillos(0.05, 0.13, 0.25, ladrillos[0]);
-            break;
-        case 2:
-            calcularLadrillos(0.12, 0.18, 0.25, ladrillos[1]);
-            break;
-        case 3:
-            calcularLadrillos(0.18, 0.18, 0.25, ladrillos[2]);
-            break;
-        case 4:
-            verCementos();
-            alert('El listado con los cementos se verá en consola.');
-            break;
-        default:
-            alert('Selecciones una opción del (1) al (4). \nPara salir elija el (5).');
-    }
-    productoElegido = parseInt(prompt(textoPrompt));
-}
+// while (productoElegido !== 5) {
+//     switch(productoElegido) {
+//         case 1:
+//             calcularLadrillos(0.05, 0.13, 0.25, ladrillos[0]);
+//             break;
+//         case 2:
+//             calcularLadrillos(0.12, 0.18, 0.25, ladrillos[1]);
+//             break;
+//         case 3:
+//             calcularLadrillos(0.18, 0.18, 0.25, ladrillos[2]);
+//             break;
+//         case 4:
+//             verCementos();
+//             alert('El listado con los cementos se verá en consola.');
+//             break;
+//         default:
+//             alert('Selecciones una opción del (1) al (4). \nPara salir elija el (5).');
+//     }
+//     productoElegido = parseInt(prompt(textoPrompt));
+// }
 
-alert('¡Gracias por utilizar nuestros servicios!');
+// alert('¡Gracias por utilizar nuestros servicios!');
