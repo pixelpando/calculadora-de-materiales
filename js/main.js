@@ -1,5 +1,3 @@
-console.warn("Los datos ofrecidos son de referencia y pueden no ser exactos.\n Los cálculos tienen incluido un 5% de desperdicio.")
-
 //Bolsa de 50 kg.
 let cemento = 50;
 
@@ -83,8 +81,8 @@ const verCementos = () => {
     }
 }
 
-const textoPrompt = 'Que tipo de ladrillos desea llevar: \n(1) '+ladrillos[0]+' \n(2) '+ladrillos[1]+' \n(3) '+ladrillos[2]+' \n(4) Ver lista de Cementos \n(5) Salir';
-let productoElegido = parseInt(prompt(textoPrompt));
+// const textoPrompt = 'Que tipo de ladrillos desea llevar: \n(1) '+ladrillos[0]+' \n(2) '+ladrillos[1]+' \n(3) '+ladrillos[2]+' \n(4) Ver lista de Cementos \n(5) Salir';
+// let productoElegido = parseInt(prompt(textoPrompt));
 
 // while (productoElegido !== 5) {
 //     switch(productoElegido) {
@@ -108,3 +106,15 @@ let productoElegido = parseInt(prompt(textoPrompt));
 // }
 
 // alert('¡Gracias por utilizar nuestros servicios!');
+
+
+let footer = document.createElement('footer');
+footer.innerHTML = '<p>©Todos los derechos reservados.</p>';
+document.body.appendChild(footer);
+
+const botonCerrar = document.getElementById('cerrar');
+const mensaje = document.getElementById('msg');
+
+botonCerrar.addEventListener('click', function() {
+    mensaje.style.display = 'none';
+});
