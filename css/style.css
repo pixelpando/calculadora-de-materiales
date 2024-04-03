@@ -18,6 +18,10 @@ header {
     padding: 5px;    
 }
 
+h1 {
+    font-size: 1.6rem;
+}
+
 footer {
     background-color: #555;
     color: #eee;
@@ -30,16 +34,57 @@ footer {
     color: #267ac5;
     border: 1px solid #267ac5;
     border-radius: 8px;
-    padding: 0.3rem 0.6rem;
-    margin: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
     display: inline-block;
 }
 
-.cerrar {
+.btn-cerrar {
     font-size: small;
     color: #333;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 20px;
 }
 
-.lista-ladrillos {
+.btn-cerrar:hover {
+    color: #eee;
+    background-color: #333;
+    border: 1px solid #333;
+    border-radius: 20px;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+/* .lista-ladrillos {
     margin-top: 2rem;
+} */
+
+select {
+    height: 2rem;
+    border-radius: 5px;
+    padding-left: 6px;
+    border: 1px solid;
+}
+
+input {
+    width: 5rem;
+    height: 2rem;
+    border-radius: 5px;
+    padding-left: 10px;
+    border: 1px solid;
+}
+
+section {
+    margin: 0.5rem 0;
+}
+
+.ocultar {
+    display: none;
 }

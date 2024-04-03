@@ -115,6 +115,7 @@ document.body.appendChild(footer);
 const botonCerrar = document.getElementById('cerrar');
 const mensaje = document.getElementById('msg');
 
-botonCerrar.addEventListener('click', function() {
-    mensaje.style.display = 'none';
+botonCerrar.addEventListener('click', () => {
+    // mensaje.style.display = 'none';
+    mensaje.className = 'ocultar';
 });
