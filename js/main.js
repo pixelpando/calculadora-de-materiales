@@ -116,6 +116,15 @@ const botonCerrar = document.getElementById('cerrar');
 const mensaje = document.getElementById('msg');
 
 botonCerrar.addEventListener('click', () => {
-    // mensaje.style.display = 'none';
     mensaje.className = 'ocultar';
+    localStorage.setItem('msgAtencion', 'ocultar')
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const msgAtencion = localStorage.getItem('msgAtencion');
+    if (msgAtencion === 'ocultar') {
+        mensaje.className = 'ocultar';
+    }
+});
+
+localStorage.removeItem('msgAtencion'); //Para que se vuelva a ver el mensaje
