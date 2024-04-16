@@ -127,4 +127,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-localStorage.removeItem('msgAtencion'); //Para que se vuelva a ver el mensaje
+localStorage.removeItem('msgAtencion'); //Para que se vuelva a ver el mensaje al actualizar la página

@@ -18,13 +18,44 @@ header {
     padding: 5px;    
 }
 
+.titulo {
+    background-color: #334;
+    color: #eee;
+    padding: 1rem;
+}
+
 h1 {
     font-size: 1.6rem;
+    margin: 0;
+}
+
+h2 {
+    margin: 0;
+}
+
+a {
+    font-size: 0.9rem;
+    color: #267ac5;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #334;
+}
+
+a.volver {
+    display: inline-block;
+    margin-top: 2rem;
+}
+
+.titulo > p {
+    color: #bbc;
+    margin: 0.2rem;
 }
 
 footer {
-    background-color: #555;
-    color: #eee;
+    background-color: #ccc;
+    color: #667;
     margin-top: 5rem;
     padding: 5px;
 }
@@ -87,4 +118,22 @@ section {
 
 .ocultar {
     display: none;
+}
+
+nav {
+    background-color: #334;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    margin-bottom: 2rem;
+}
+
+.fa-cart-shopping {
+    color: #fff;
+    font-size: 2rem;
+}
+
+.fa-cart-shopping:hover {
+    color: #25b438;
 }

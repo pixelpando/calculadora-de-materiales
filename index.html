@@ -5,15 +5,26 @@
     <!-- CSS-->
     <link rel="stylesheet" href="./css/style.css">
     <!-- JS -->
+    <script src="https://kit.fontawesome.com/12711a9fbb.js" crossorigin="anonymous"></script>
     <script defer src="./js/main.js"></script>
     <title>Calculadora de Materiales | Pablo Pandolfi</title>
 </head>
 <body>
-    <header>Calculadora de Materiales v0.34. Última Actualización: 09/04/2024</header>
-    <h1>Pre-Entrega 2 - Calculadora de Materiales</h1>
-    <p>Calcula la cantidad de ladrillos y cemento según las dimensiones de las paredes a construir</p>
+    <header>Calculadora de Materiales v0.35. Última Actualización: 15/04/2024</header>
+    <nav>
+        <div class="titulo">
+            <h1>Calculadora de Materiales</h1>
+            <p>Calcula la cantidad de ladrillos y cemento según las dimensiones de las paredes a construir</p>
+        </div>
+        <div class="carrito">
+            <a href="cart.html">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+        </div>
+    </nav>
 
-    <div class="mensaje" id="msg">Los datos ofrecidos son de referencia y pueden no ser exactos. Los cálculos <strong>tienen incluido un 5% de desperdicio</strong>. <button id="cerrar" class="btn-cerrar">Cerrar</button></div>
+    <div class="mensaje" id="msg">Los datos son a modo de referencia y pueden no ser exactos. Los cálculos <strong>tienen incluido un 5% de desperdicio</strong>. <button id="cerrar" class="btn-cerrar">Cerrar</button></div>
+
     <div class="contenedor">
          <section>
             <span>Longitud de paredes: </span>
@@ -47,6 +58,10 @@
         <section>
             <button id="calcular">Calcular</button><br><br>
             <div id="resultado">Necesitas XX unidades de ladrillos XX</div>
+        </section>
+
+        <section>
+            <button id="agregarAlCarrito">Agregar al carrito</button><br><br>
         </section>
 
         <!-- <section>
