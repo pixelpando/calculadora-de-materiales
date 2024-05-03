@@ -11,3 +11,5 @@ function renderCarrito(cartItems) {
         cartContainer.appendChild(cart);
     });
 }
+
+renderCarrito();

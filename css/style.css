@@ -109,7 +109,7 @@ select {
 }
 
 input {
-    width: 5rem;
+    width: 7rem;
     height: 2rem;
     border-radius: 5px;
     padding-left: 10px;
@@ -197,7 +197,7 @@ section.productos.carrito {
     gap: 10px;
 }
 
-.sku-stock {
+.sku {
     font-size: 0.8rem;
     color: #99a;
 }
@@ -229,4 +229,8 @@ section.productos.carrito {
 
 .btn-calcular input:hover {
     background-color: #13c22b;
+}
+
+section.calcular {
+    margin-top: 3rem;
 }
