@@ -108,6 +108,12 @@ const verCementos = () => {
 // alert('¡Gracias por utilizar nuestros servicios!');
 
 
+
+// **************** NUEVA VERSION ********************
+
+let header = document.getElementsByTagName('header');
+header[0].innerText = 'Calculadora de Materiales v0.41. Última Actualización: 03/05/2024';
+
 let footer = document.createElement('footer');
 footer.innerHTML = '<p>©Todos los derechos reservados.</p>';
 document.body.appendChild(footer);
@@ -117,14 +123,14 @@ const mensaje = document.getElementById('msg');
 
 botonCerrar.addEventListener('click', () => {
     mensaje.className = 'ocultar';
-    localStorage.setItem('msgAtencion', 'ocultar')
+    sessionStorage.setItem('msgAtencion', 'ocultar');
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const msgAtencion = localStorage.getItem('msgAtencion');
+    const msgAtencion = sessionStorage.getItem('msgAtencion');
     if (msgAtencion === 'ocultar') {
         mensaje.className = 'ocultar';
     }
 });
 
-localStorage.removeItem('msgAtencion'); //Para que se vuelva a ver el mensaje al actualizar la página
+// localStorage.removeItem('msgAtencion');

@@ -3,7 +3,7 @@ body {
     text-align: center;
     color: #333;
     background-color: #eee;
-    height: 200vh;
+    /* height: 200vh; */
     padding: 0;
     margin: 0;
 }
@@ -29,8 +29,12 @@ h1 {
     margin: 0;
 }
 
-h2 {
+/* h2 {
     margin: 0;
+} */
+
+h3 {
+    margin-top: 3rem;
 }
 
 a {
@@ -44,7 +48,7 @@ a:hover {
 }
 
 a.volver {
-    display: inline-block;
+    display: block;
     margin-top: 2rem;
 }
 
@@ -66,7 +70,7 @@ footer {
     border: 1px solid #267ac5;
     border-radius: 8px;
     padding: 0.5rem 1rem;
-    margin: 0 1rem;
+    margin: 1rem;
     display: inline-block;
 }
 
@@ -89,7 +93,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 500px;
+    max-width: 800px; /*500px*/
     margin: 2rem auto;
 }
 
@@ -110,6 +114,11 @@ input {
     border-radius: 5px;
     padding-left: 10px;
     border: 1px solid;
+    cursor: pointer;
+}
+
+.inputs span {
+    margin-left: 1rem;
 }
 
 section {
@@ -125,7 +134,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10%;
+    /* gap: 10%; */
     margin-bottom: 2rem;
 }
 
@@ -136,4 +145,88 @@ nav {
 
 .fa-cart-shopping:hover {
     color: #25b438;
+}
+
+.fa-triangle-exclamation {
+    padding-right: 5px;
+    color: #fa0;
+}
+
+.carrito-icon {
+    position: absolute;
+    right: 10%;
+}
+
+.grilla-productos {
+    display: inline-block;
+    width: 100%;
+    /* gap: 10px; */
+}
+
+.producto > img {
+    max-width: 70%;
+}
+
+.producto {
+    width: 170px;
+    height: 290px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 5px 8px #0001;
+    display: inline-block;
+}
+
+label {
+    display: block;
+    height: 2rem;
+}
+
+section.productos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+section.productos.carrito {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sku-stock {
+    font-size: 0.8rem;
+    color: #99a;
+}
+
+.precio {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.contenedor.carrito .producto {
+    width: 170px;
+    height: 220px;
+}
+
+.btn-calcular {
+    margin: 20px 0;
+}
+
+.btn-calcular input {
+    width: 8rem;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #25b438;
+    color: #fff;
+    border: none;
+}
+
+.btn-calcular input:hover {
+    background-color: #13c22b;
 }

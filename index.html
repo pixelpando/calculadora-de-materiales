@@ -7,62 +7,106 @@
     <!-- JS -->
     <script src="https://kit.fontawesome.com/12711a9fbb.js" crossorigin="anonymous"></script>
     <script defer src="./js/main.js"></script>
+    <script defer src="./js/carrito.js"></script>
     <title>Calculadora de Materiales | Pablo Pandolfi</title>
 </head>
 <body>
-    <header>Calculadora de Materiales v0.35. Última Actualización: 15/04/2024</header>
+    <header></header>
     <nav>
         <div class="titulo">
             <h1>Calculadora de Materiales</h1>
             <p>Calcula la cantidad de ladrillos y cemento según las dimensiones de las paredes a construir</p>
         </div>
-        <div class="carrito">
-            <a href="cart.html">
+        <div class="carrito-icon">
+            <a href="carrito.html">
                 <i class="fa-solid fa-cart-shopping"></i>
             </a>
         </div>
     </nav>
 
-    <div class="mensaje" id="msg">Los datos son a modo de referencia y pueden no ser exactos. Los cálculos <strong>tienen incluido un 5% de desperdicio</strong>. <button id="cerrar" class="btn-cerrar">Cerrar</button></div>
+    <div class="mensaje" id="msg"><i class="fa-solid fa-triangle-exclamation fa-lg"></i></i>Los datos son a modo de referencia y pueden no ser exactos. Los cálculos <strong>tienen incluido un 5% de desperdicio</strong>. <button id="cerrar" class="btn-cerrar">Cerrar</button></div>
 
     <div class="contenedor">
-         <section>
-            <span>Longitud de paredes: </span>
-            <input type="number" id="inputLogitud" placeholder="Ej.: 5.60"> mts.
-        </section>
-
-        <section>
-            <span>Altura de paredes: </span>
-            <input type="number" id="inputAltura" placeholder="Ej.: 2.35"> mts.
-        </section>
 
         <section class="lista-ladrillos">
-            <label for="ladrillos">Elegí el tipo de ladrillo:</label>
-            <select name="ladrillos" id="ladrillos">
-            <option value="ladrillosC">Ladrillos Comunes 5x13x25</option>
+            <h2>Elegí el tipo de ladrillo</h2>
+            <form class="grilla-productos">
+
+                <section class="productos">
+                    <div class="producto">
+                        <label for="1">Ladrillos Comunes 5x13x25</label>
+                        <img src="./images/1-ladrillo-comun-5x13x25.jpg" alt="Ladrillo comun 5x13x25">
+                        <div class="sku-stock">SKU <span id="1">1</span><span class="espaciado"> | </span><span>STOCK </span><span id="stock">2753</span></div>
+                        <div class="precio">$ <span id="precio">112</span></div>
+                        <input type="radio" id="1" name="ladrillos" value="Ladrillo comun 5x13x25" checked="true">
+                    </div>
+
+                    <div class="producto">
+                        <label for="2">Ladrillos Huecos 6 agujeros 8x18x33</label>
+                        <img src="./images/2-ladrillo-hueco-6a-8x18x33.jpg" alt="Ladrillo hueco 6a 8x18x33">
+                        <div class="sku-stock">SKU <span id="2">2</span><span class="espaciado"> | </span><span>STOCK </span><span id="stock">1247</span></div>
+                        <div class="precio">$ <span id="precio">356</span></div>
+                        <input type="radio" id="2" name="ladrillos" value="Ladrillo hueco 6a 8x18x33">
+                    </div>
+
+                    <div class="producto">
+                        <label for="3">Ladrillos Huecos 6 agujeros 12x18x33</label>
+                        <img src="./images/3-ladrillo-hueco-6a-12x18x33.jpg" alt="Ladrillo hueco 6a 12x18x33">
+                        <div class="sku-stock">SKU <span id="3">3</span><span class="espaciado"> | </span><span>STOCK </span><span id="stock">754</span></div>
+                        <div class="precio">$ <span id="precio">446</span></div>
+                        <input type="radio" id="3" name="ladrillos" value="Ladrillo hueco 9a">
+                    </div>
+
+                    <div class="producto">
+                        <label for="4">Ladrillos Huecos 9 agujeros 12x18x33</label>
+                        <img src="./images/4-ladrillo-hueco-9a-12x18x33.jpg" alt="Ladrillo hueco 9a 12x18x33">
+                        <div class="sku-stock">SKU <span id="4">4</span><span class="espaciado"> | </span><span>STOCK </span><span id="stock">652</span></div>
+                        <div class="precio">$ <span id="precio">451</span></div>
+                        <input type="radio" id="3" name="ladrillos" value="Ladrillo hueco 9a">
+                    </div>
+
+                    </section>
+
+                <section class="inputs">
+                    <h3>Ingrese las medidas de las paredes:</h3>
+                    <span>Longitud</span>
+                    <input type="number" id="inputLogitud" placeholder="Ej.: 5.60"> mts.
+                    <span>Altura</span>
+                    <input type="number" id="inputAltura" placeholder="Ej.: 2.35"> mts.
+                </section>
+        
+                <section class="cementos">
+                    <h3>Elegí la marca del cemento:</h3>
+                    <!-- <label for="cementos">Elegí la marca del cemento:</label> -->
+                    <select name="cementos" id="cementos">
+                        <option value="LomaNegra">Loma Negra</option>
+                        <option value="Avellaneda">Cementos Avellaneda</option>
+                        <option value="Holcim">Holcim</option>
+                        <option value="PCR">PCR</option>
+                    </select>
+                </section>
+
+                <section>
+                    <div class="btn-calcular">
+                        <input type="submit" value="Calcular">
+                    </div>
+                </section>
+            </form> 
+            
+            <!-- <option value="ladrillosC">Ladrillos Comunes 5x13x25</option>
             <option value="ladrillos6A">Ladrillos Huecos 6 agujeros 12x18x25</option>
-            <option value="ladrillos9A">Ladrillos Huecos 9 agujeros 18x18x25</option>
+            <option value="ladrillos9A">Ladrillos Huecos 9 agujeros 18x18x25</option> -->
             </select>
         </section>
 
-        <section class="lista-cementos">
-            <label for="cementos">Elegí la marca del cemento:</label>
-            <select name="cementos" id="cementos">
-            <option value="LomaNegra">Loma Negra</option>
-            <option value="Avellaneda">Cementos Avellaneda</option>
-            <option value="Holcim">Holcim</option>
-            <option value="PCR">PCR</option>
-            </select>
-        </section>
-
-        <section>
+        <!-- <section>
             <button id="calcular">Calcular</button><br><br>
             <div id="resultado">Necesitas XX unidades de ladrillos XX</div>
-        </section>
+        </section> -->
 
-        <section>
+        <!-- <section>
             <button id="agregarAlCarrito">Agregar al carrito</button><br><br>
-        </section>
+        </section> -->
 
         <!-- <section>
             <span>Cantidad de bolsas de cemento de 50 kg.:</span>
