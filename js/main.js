@@ -1,39 +1,10 @@
-// const textoPrompt = 'Que tipo de ladrillos desea llevar: \n(1) '+ladrillos[0]+' \n(2) '+ladrillos[1]+' \n(3) '+ladrillos[2]+' \n(4) Ver lista de Cementos \n(5) Salir';
-// let productoElegido = parseInt(prompt(textoPrompt));
-
-// while (productoElegido !== 5) {
-//     switch(productoElegido) {
-//         case 1:
-//             calcularLadrillos(0.05, 0.13, 0.25, ladrillos[0]);
-//             break;
-//         case 2:
-//             calcularLadrillos(0.12, 0.18, 0.25, ladrillos[1]);
-//             break;
-//         case 3:
-//             calcularLadrillos(0.18, 0.18, 0.25, ladrillos[2]);
-//             break;
-//         case 4:
-//             verCementos();
-//             alert('El listado con los cementos se verá en consola.');
-//             break;
-//         default:
-//             alert('Selecciones una opción del (1) al (4). \nPara salir elija el (5).');
-//     }
-//     productoElegido = parseInt(prompt(textoPrompt));
-// }
-
-// alert('¡Gracias por utilizar nuestros servicios!');
-
-
-
-// **************** NUEVA VERSION ********************
-
+// Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.45. Última Actualización: 03/05/2024';
+header[0].innerText = 'Calculadora de Materiales v0.48. Última Actualización: 03/05/2024';
 
+// Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
 msgDesperdicio.innerHTML = '<i class="fa-solid fa-triangle-exclamation fa-lg"></i>Los datos son a modo de referencia y pueden no ser exactos. Los cálculos <strong>tienen incluido un 5% de desperdicio</strong>. <button id="cerrar" class="btn-cerrar">Cerrar</button>';
-
 
 //Bolsa de 50 kg.
 let cemento = 50;
@@ -43,8 +14,6 @@ let desperdicio = 1.05;
 
 //Espesor del mortero en mts.
 let junta = 0.015;
-
-const ladrillos = ['Ladrillos Comunes 5x13x25', 'Ladrillos Huecos 6 agujeros 12x18x25', 'Ladrillos Huecos 9 agujeros 18x18x25']
 
 //Medidas de referencia ladrillo común en mts.
 let altoLadrillo = 0.05;
@@ -57,44 +26,65 @@ const productos = [
         id: 1,
         nombre: 'Ladrillo Común 5x13x25',
         precio: 112,
-        imagen: './images/1-ladrillo-comun-5x13x25.jpg'
+        imagen: './images/1-ladrillo-comun-5x13x25.jpg',
+        alto: 0.05,
+        ancho: 0.13,
+        largo: 0.25
     },
     {
         id: 2,
         nombre: 'Ladrillo Hueco 6A 8x18x33',
         precio: 356,
-        imagen: './images/2-ladrillo-hueco-6a-8x18x33.jpg'
+        imagen: './images/2-ladrillo-hueco-6a-8x18x33.jpg',
+        alto: 0.08,
+        ancho: 0.18,
+        largo: 0.33
     },
     {
         id: 3,
         nombre: 'Ladrillo Hueco 6A 12x18x33',
         precio: 446,
         imagen: './images/3-ladrillo-hueco-6a-12x18x33.jpg',
+        alto: 0.12,
+        ancho: 0.18,
+        largo: 0.33,
         checked: 'checked'
     },
     {
         id: 4,
         nombre: 'Ladrillo Hueco 9A 12x18x33',
         precio: 451,
-        imagen: './images/4-ladrillo-hueco-9a-12x18x33.jpg'
+        imagen: './images/4-ladrillo-hueco-9a-12x18x33.jpg',
+        alto: 0.12,
+        ancho: 0.18,
+        largo: 0.33
     },
     {
         id: 5,
         nombre: 'Ladrillo Hueco 9A 18x18x33',
         precio: 685,
-        imagen: './images/5-ladrillo-hueco-9a-18x18x33.jpg'
+        imagen: './images/5-ladrillo-hueco-9a-18x18x33.jpg',
+        alto: 0.18,
+        ancho: 0.18,
+        largo: 0.33
     },
     {
         id: 6,
         nombre: 'Ladrillo Portante 18x19x33',
         precio: 819,
-        imagen: './images/6-ladrillo-portante-18x19x33.jpg'
+        imagen: './images/6-ladrillo-portante-18x19x33.jpg',
+        alto: 0.18,
+        ancho: 0.19,
+        largo: 0.33
     },
     {
         id: 7,
         nombre: 'Ladrillo Retak 10x25x50',
         precio: 2882,
-        imagen: './images/7-ladrillo-retak-10x25x50.jpg'
+        imagen: './images/7-ladrillo-retak-10x25x50.jpg',
+        alto: 0.10,
+        ancho: 0.25,
+        largo: 0.50
     }
 ]
 
@@ -163,21 +153,20 @@ function renderMarcaCemento (marcasArray) {
 renderMarcaCemento(marcaCemento);
 
 
-function getInputId () {
+function getInputId() {
     let inputId = document.querySelectorAll('.productoSeleccion');
     inputId.forEach (clickRadio => {
         clickRadio.onClick = (e) => {
             const productId = e.currentTarget.id;
+            console.log(productId);
             const selectedProduct = productos.find(producto => producto.id == productId);
+            console.log(selectedProduct);
             cartProducts.push(selectedProduct);
             console.log(cartProducts);
         }
     })
 }
 
-
-
-//  *****************************************************************************
 
 //Funcion principal
 function calcularLadrillos() { 
@@ -211,18 +200,17 @@ function calcularLadrillos() {
                             <p>Cantidad: <strong>${ladrillosCantidad} unid.</strong></p>
                             <p>Marca de cemento: <strong>${bolsaCemento}</strong></p>
                             <p>Cantidad de bolsas: <strong>${cementoBolsas} unid. de 50 kg.</strong></p>
-                            <p></p></div>
-                            `;
+                            </div>`;
 
     const resultado = document.getElementById('resultado');
     resultado.innerHTML = resultadoCalculo;
 }
 
+
 let botonCalcular = document.getElementById('botonCalcular');
 botonCalcular.addEventListener('click', function() {
     calcularLadrillos();
 });
-
 
 function borrarCalculo() {
     document.querySelector('.resultado-final').remove();
@@ -233,9 +221,26 @@ botonBorrar.addEventListener('click', function() {
     borrarCalculo();
 });
 
-// ******************************************************************************
 
+const radioSelection = document.querySelectorAll('input[type="radio"].productoSeleccion');
 
+// Agrega un event listener a cada radio button
+radioSelection.forEach(radio => {
+    radio.addEventListener('click', function() {
+        const idSeleccionado = parseInt(this.id);
+        const productoSeleccionado = productos.find(producto => producto.id === idSeleccionado);
+        
+        if (productoSeleccionado) {
+            altoLadrillo = productoSeleccionado.alto;
+            anchoLadrillo = productoSeleccionado.ancho;
+            largoLadrillo = productoSeleccionado.largo;
+        } else {
+            console.log("No selección ningún producto");
+        }
+    });
+});
+
+// Footer
 let footer = document.createElement('footer');
 footer.innerHTML = '<p>©Todos los derechos reservados.</p>';
 document.body.appendChild(footer);
