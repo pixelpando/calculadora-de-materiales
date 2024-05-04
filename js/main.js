@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.52. Última Actualización: 03/05/2024';
+header[0].innerText = 'Calculadora de Materiales v0.57. Última Actualización: 03/05/2024';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
@@ -16,9 +16,9 @@ let desperdicio = 1.05;
 let junta = 0.015;
 
 //Medidas de referencia ladrillo común en mts.
-let altoLadrillo = 0.05;
-let anchoLadrillo = 0.13;
-let largoLadrillo = 0.25;
+let altoLadrillo = 0.12;
+let anchoLadrillo = 0.18;
+let largoLadrillo = 0.33;
 
 
 const productos = [
@@ -204,16 +204,22 @@ function calcularLadrillos() {
 
     const resultado = document.getElementById('resultado');
     resultado.innerHTML = resultadoCalculo;
+
+    tryAnalisis(longitud, altura);
 }
 
 
 let botonCalcular = document.getElementById('botonCalcular');
-botonCalcular.addEventListener('click', function() {
+botonCalcular.addEventListener('click', () => {
     calcularLadrillos();
 });
 
 function borrarCalculo() {
-    document.querySelector('.resultado-final').remove();
+    let resultadoFinal = document.querySelector('.resultado-final');
+    resultadoFinal.remove();
+    let mensajeAnalisis = document.querySelector('#analisis-resultado');
+    mensajeAnalisis.innerText = '';
+    mensajeAnalisis.classList.remove('mensaje','error','correcto','ocultar');
 }
 
 let botonBorrar = document.getElementById('botonBorrar');
@@ -239,6 +245,32 @@ radioSelection.forEach(radio => {
         }
     });
 });
+
+
+
+function tryAnalisis(longitud, altura) {
+    let analisis = '';
+    let analisisResultado = document.getElementById('analisis-resultado');
+    try {
+        if ((longitud && altura) > 0) {
+            analisisResultado.classList.add('mensaje','correcto');
+            analisis = 'El cálculo se realizó correctamente'; 
+        } else {
+            analisisResultado.classList.add('mensaje','error');
+            throw new Error('Ingrese las medidas para realizar el cálculo');
+        }
+
+    } catch(err) {
+        analisis = err;
+
+    } finally {
+        console.log('Analisis final: '+analisis);
+        analisisResultado.innerHTML = analisis;
+        setTimeout(() => {
+            analisisResultado.classList.add('ocultar');
+          }, 3000);
+    }
+}
 
 // Footer
 let footer = document.createElement('footer');
