@@ -3,7 +3,6 @@ body {
     text-align: center;
     color: #333;
     background-color: #eee;
-    /* height: 200vh; */
     padding: 0;
     margin: 0;
 }
@@ -28,10 +27,6 @@ h1 {
     font-size: 1.6rem;
     margin: 0;
 }
-
-/* h2 {
-    margin: 0;
-} */
 
 h3 {
     margin-top: 3rem;
@@ -93,13 +88,9 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 800px; /*500px*/
-    margin: 2rem auto;
+    max-width: 800px;
+    margin: 1rem auto;
 }
-
-/* .lista-ladrillos {
-    margin-top: 2rem;
-} */
 
 select {
     height: 2rem;
@@ -134,7 +125,6 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* gap: 10%; */
     margin-bottom: 2rem;
 }
 
@@ -180,7 +170,7 @@ nav {
 
 label {
     display: block;
-    height: 2rem;
+    height: 2.5rem;
 }
 
 section.productos {
@@ -233,4 +223,30 @@ section.productos.carrito {
 
 section.calcular {
     margin-top: 3rem;
+}
+
+#botonBorrar {
+    background-color: #bb0000;
+}
+
+#botonBorrar:hover {
+    background-color: #d73030;
+}
+
+.resultado-final {
+    min-width: 400px;
+    background-color: #556;
+    color: #eee;
+    border: 3px solid #fff;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.resultado-final > h4 {
+    font-size: 1.4rem;
+}
+
+section#resultado {
+   margin-top: 2rem; 
 }
