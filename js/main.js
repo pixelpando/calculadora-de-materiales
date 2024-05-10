@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.57. Última Actualización: 03/05/2024';
+header[0].innerText = 'Calculadora de Materiales v0.59. Última Actualización: 03/05/2024';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
@@ -19,6 +19,7 @@ let junta = 0.015;
 let altoLadrillo = 0.12;
 let anchoLadrillo = 0.18;
 let largoLadrillo = 0.33;
+let nombreLadrillo = 'Ladrillo Hueco 6A 12x18x33';
 
 
 const productos = [
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mensaje.className = 'ocultar';
     }
 });
-// localStorage.removeItem('msgAtencion');
+
 
 let productsContainer = document.getElementById('products-container');
 
@@ -158,11 +159,8 @@ function getInputId() {
     inputId.forEach (clickRadio => {
         clickRadio.onClick = (e) => {
             const productId = e.currentTarget.id;
-            console.log(productId);
             const selectedProduct = productos.find(producto => producto.id == productId);
-            console.log(selectedProduct);
             cartProducts.push(selectedProduct);
-            console.log(cartProducts);
         }
     })
 }
@@ -170,9 +168,9 @@ function getInputId() {
 
 //Funcion principal
 function calcularLadrillos() { 
-    const longitud = document.getElementById('inputLongitud').value;
-    const altura = document.getElementById('inputAltura').value;
-    const bolsaCemento = document.getElementById('marcas-cemento').value;
+    let longitud = document.getElementById('inputLongitud').value;
+    let altura = document.getElementById('inputAltura').value;
+    let bolsaCemento = document.getElementById('marcas-cemento').value;
 
     let resultadoPared = longitud * altura;
 
@@ -196,10 +194,12 @@ function calcularLadrillos() {
     
     let resultadoCalculo = `<div class="resultado-final">
                             <h4>- RESULTADOS -</h4>
+                            <p>Producto: <strong>${nombreLadrillo}</strong></p>
                             <p>Superficie de pared: <strong>${resultadoPared} m<sup>2</sup></strong></p>
                             <p>Cantidad: <strong>${ladrillosCantidad} unid.</strong></p>
                             <p>Marca de cemento: <strong>${bolsaCemento}</strong></p>
                             <p>Cantidad de bolsas: <strong>${cementoBolsas} unid. de 50 kg.</strong></p>
+                            <button class="agregar-carrito" id="agregarAlCarrito">Agregar al Carrito</button>
                             </div>`;
 
     const resultado = document.getElementById('resultado');
@@ -207,7 +207,6 @@ function calcularLadrillos() {
 
     tryAnalisis(longitud, altura);
 }
-
 
 let botonCalcular = document.getElementById('botonCalcular');
 botonCalcular.addEventListener('click', () => {
@@ -240,37 +239,40 @@ radioSelection.forEach(radio => {
             altoLadrillo = productoSeleccionado.alto;
             anchoLadrillo = productoSeleccionado.ancho;
             largoLadrillo = productoSeleccionado.largo;
-        } else {
-            console.log("No selección ningún producto");
+            nombreLadrillo = productoSeleccionado.nombre;
         }
     });
 });
-
 
 
 function tryAnalisis(longitud, altura) {
     let analisis = '';
     let analisisResultado = document.getElementById('analisis-resultado');
     try {
-        if ((longitud && altura) > 0) {
+        // if ((longitud && altura) > 0) {
+        if (longitud > 0 || altura > 0) {
             analisisResultado.classList.add('mensaje','correcto');
             analisis = 'El cálculo se realizó correctamente'; 
         } else {
             analisisResultado.classList.add('mensaje','error');
-            throw new Error('Ingrese las medidas para realizar el cálculo');
+            throw new Error('Ingrese las medidas correctas para realizar el cálculo.');
         }
 
     } catch(err) {
         analisis = err;
 
     } finally {
-        console.log('Analisis final: '+analisis);
         analisisResultado.innerHTML = analisis;
         setTimeout(() => {
             analisisResultado.classList.add('ocultar');
+            analisisResultado.classList.remove('mensaje', 'error', 'correcto', 'ocultar');
+            analisisResultado.innerText = '';
           }, 3000);
     }
 }
+
+
+
 
 // Footer
 let footer = document.createElement('footer');
