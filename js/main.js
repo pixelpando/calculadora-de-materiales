@@ -22,92 +22,57 @@ let largoLadrillo = 0.33;
 let nombreLadrillo = 'Ladrillo Hueco 6A 12x18x33';
 
 
-const productos = [
-    {
-        id: 1,
-        nombre: 'Ladrillo Común 5x13x25',
-        precio: 112,
-        imagen: './images/1-ladrillo-comun-5x13x25.jpg',
-        alto: 0.05,
-        ancho: 0.13,
-        largo: 0.25
-    },
-    {
-        id: 2,
-        nombre: 'Ladrillo Hueco 6A 8x18x33',
-        precio: 356,
-        imagen: './images/2-ladrillo-hueco-6a-8x18x33.jpg',
-        alto: 0.08,
-        ancho: 0.18,
-        largo: 0.33
-    },
-    {
-        id: 3,
-        nombre: 'Ladrillo Hueco 6A 12x18x33',
-        precio: 446,
-        imagen: './images/3-ladrillo-hueco-6a-12x18x33.jpg',
-        alto: 0.12,
-        ancho: 0.18,
-        largo: 0.33,
-        checked: 'checked'
-    },
-    {
-        id: 4,
-        nombre: 'Ladrillo Hueco 9A 12x18x33',
-        precio: 451,
-        imagen: './images/4-ladrillo-hueco-9a-12x18x33.jpg',
-        alto: 0.12,
-        ancho: 0.18,
-        largo: 0.33
-    },
-    {
-        id: 5,
-        nombre: 'Ladrillo Hueco 9A 18x18x33',
-        precio: 685,
-        imagen: './images/5-ladrillo-hueco-9a-18x18x33.jpg',
-        alto: 0.18,
-        ancho: 0.18,
-        largo: 0.33
-    },
-    {
-        id: 6,
-        nombre: 'Ladrillo Portante 18x19x33',
-        precio: 819,
-        imagen: './images/6-ladrillo-portante-18x19x33.jpg',
-        alto: 0.18,
-        ancho: 0.19,
-        largo: 0.33
-    },
-    {
-        id: 7,
-        nombre: 'Ladrillo Retak 10x25x50',
-        precio: 2882,
-        imagen: './images/7-ladrillo-retak-10x25x50.jpg',
-        alto: 0.10,
-        ancho: 0.25,
-        largo: 0.50
+let productsContainer = document.getElementById('products-container');
+let marcasContainer = document.getElementById('marcas-cemento');
+let txtErrorProductos = 'ERROR. No se pudo cargar los productos. Intente nuevamente más tarde.';
+let msgErrorProductos = document.getElementById('msgErrorProductos');
+
+
+fetch('../db/ladrillos.json')
+.then(response => response.json())
+.then(data => {
+    data.forEach(producto => {
+        const card = document.createElement('div');
+        card.classList.add('producto');
+        card.innerHTML = `<label for="${producto.id}">${producto.nombre}</label>
+                          <img src="${producto.imagen}" alt="${producto.nombre}">
+                          <div class="sku">SKU <span id="${producto.id}">${producto.id}</span></div>
+                          <div class="precio">$ <span>${producto.precio}</span></div>
+                          <input type="radio" class="productoSeleccion" name="ladrillos" id="${producto.id}" id="${producto.id}" ${producto.checked}>`
+        productsContainer.appendChild(card);
+    })
+})
+
+
+const obtenerMarcasCementos = async () => {
+    let URL = '../db/cementos.json';
+    const marcaError = `<option disabled>ERROR. No se pudo cargar las marcas, intente más tarde.</option>`;
+    let renderizado = ``;
+
+    try {
+        let solicitud = await fetch(URL);
+        let response = await solicitud.json();
+
+        response.forEach(marcaCemento => {
+            let marcasContainer = document.getElementById('marcas-cemento');
+            renderizado += `<option value="${marcaCemento.value}">${marcaCemento.nombre}</option>`;
+            marcasContainer = renderizado;
+        })
+
+    } catch(err) {
+        console.log('Error detectado', err);
+        renderizado = marcaError;
+
+    } finally {
+        let marcasContainer = document.getElementById('marcas-cemento');
+        marcasContainer.innerHTML = renderizado;
+        // document.body.innerHTML = renderizado;
     }
-]
+}
+obtenerMarcasCementos();
 
-const marcaCemento = [
-    {
-        value: 'lomanegra',
-        nombre: 'Loma Negra'
-    },
-    {
-        value: 'avellaneda',
-        nombre: 'Cementos Avellaneda'
-    },
-    {
-        value: 'holcim',
-        nombre: 'Holcim'
-    },
-    {
-        value: 'pcr',
-        nombre: 'PCR'
-    },
-]
 
+//Boton cerrar mensaje
 const botonCerrar = document.getElementById('cerrar');
 const mensaje = document.getElementById('msg');
 
@@ -122,36 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mensaje.className = 'ocultar';
     }
 });
-
-
-let productsContainer = document.getElementById('products-container');
-
-function renderProducto (productsArray) {
-    productsArray.forEach (producto => {
-        const card = document.createElement('div');
-        card.classList.add('producto');
-        card.innerHTML = `<label for="${producto.id}">${producto.nombre}</label>
-                          <img src="${producto.imagen}" alt="${producto.nombre}">
-                          <div class="sku">SKU <span id="${producto.id}">${producto.id}</span></div>
-                          <div class="precio">$ <span>${producto.precio}</span></div>
-                          <input type="radio" class="productoSeleccion" name="ladrillos" id="${producto.id}" id="${producto.id}" ${producto.checked}>`;
-        productsContainer.appendChild(card);
-    })
-}
-renderProducto(productos);
-
-
-let marcasContainer = document.getElementById('marcas-cemento');
-
-function renderMarcaCemento (marcasArray) {
-    marcasArray.forEach (marcaCemento => {
-        const opcion = document.createElement('option');
-        opcion.innerHTML = `<option value="${marcaCemento.value}">${marcaCemento.nombre}</option>`;
-        marcasContainer.appendChild(opcion);
-    })
-    getInputId();
-}
-renderMarcaCemento(marcaCemento);
 
 
 function getInputId() {
@@ -178,7 +113,7 @@ function calcularLadrillos() {
 
     let ladrillosCantidad = resultadoPared / ladrilloMortero * desperdicio;
 
-    // let cementoBolsas = Math.round((ladrillosCantidad / 3) / cemento);
+    //let cementoBolsas = Math.round((ladrillosCantidad / 3) / cemento);
     let juntaSuperior = junta * largoLadrillo * anchoLadrillo;
     let juntaLateral = junta * altoLadrillo * anchoLadrillo;
     let juntaTotal = (juntaSuperior + juntaLateral) * ladrillosCantidad;
@@ -208,6 +143,8 @@ function calcularLadrillos() {
     tryAnalisis(longitud, altura);
 }
 
+
+//Botones
 let botonCalcular = document.getElementById('botonCalcular');
 botonCalcular.addEventListener('click', () => {
     calcularLadrillos();
@@ -218,7 +155,7 @@ function borrarCalculo() {
     resultadoFinal.remove();
     let mensajeAnalisis = document.querySelector('#analisis-resultado');
     mensajeAnalisis.innerText = '';
-    mensajeAnalisis.classList.remove('mensaje','error','correcto','ocultar');
+    mensajeAnalisis.classList.remove('mensaje','error','correcto','ocultar-anim');
 }
 
 let botonBorrar = document.getElementById('botonBorrar');
@@ -227,9 +164,9 @@ botonBorrar.addEventListener('click', function() {
 });
 
 
+//Agrega un event listener a cada radio button
 const radioSelection = document.querySelectorAll('input[type="radio"].productoSeleccion');
 
-// Agrega un event listener a cada radio button
 radioSelection.forEach(radio => {
     radio.addEventListener('click', function() {
         const idSeleccionado = parseInt(this.id);
@@ -244,7 +181,7 @@ radioSelection.forEach(radio => {
     });
 });
 
-
+//Mensaje de estado de calculo con try-catch-finally
 function tryAnalisis(longitud, altura) {
     let analisis = '';
     let analisisResultado = document.getElementById('analisis-resultado');
@@ -264,17 +201,15 @@ function tryAnalisis(longitud, altura) {
     } finally {
         analisisResultado.innerHTML = analisis;
         setTimeout(() => {
-            analisisResultado.classList.add('ocultar');
-            analisisResultado.classList.remove('mensaje', 'error', 'correcto', 'ocultar');
+            analisisResultado.classList.add('ocultar-anim');
+            analisisResultado.classList.remove('mensaje', 'error', 'correcto', 'ocultar-anim');
             analisisResultado.innerText = '';
           }, 3000);
     }
 }
 
 
-
-
-// Footer
+//Footer
 let footer = document.createElement('footer');
 footer.innerHTML = '<p>©Todos los derechos reservados.</p>';
 document.body.appendChild(footer);

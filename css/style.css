@@ -280,7 +280,7 @@ section.calcular {
     }
 }
   
-.ocultar {
+.ocultar-anim {
     animation: ocultar 3s ease-in-out;
 }
   
