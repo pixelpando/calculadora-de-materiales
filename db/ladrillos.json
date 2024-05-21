@@ -6,7 +6,8 @@
         "imagen": "./images/1-ladrillo-comun-5x13x25.jpg",
         "alto": 0.05,
         "ancho": 0.13,
-        "largo": 0.25
+        "largo": 0.25,
+        "checked": "checked"
     },
     {
         "id": 2,
@@ -24,8 +25,7 @@
         "imagen": "./images/3-ladrillo-hueco-6a-12x18x33.jpg",
         "alto": 0.12,
         "ancho": 0.18,
-        "largo": 0.33,
-        "checked": "checked"
+        "largo": 0.33
     },
     {
         "id": 4,

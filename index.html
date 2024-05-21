@@ -34,7 +34,7 @@
 
         <section class="lista-ladrillos">
             <h2>Elegí el tipo de ladrillo</h2>
-            <form class="grilla-productos">
+            <div class="grilla-productos">
 
                 <!-- <span class="mensaje error" id="msgErrorProductos"></span> -->
                 
@@ -45,9 +45,9 @@
                 <section class="inputs">
                     <h3>Ingrese las medidas de las paredes:</h3>
                     <span>Longitud</span>
-                    <input type="number" id="inputLongitud" placeholder="Ej.: 5.6" step="0.1" min="1" max="9999" required> mts.
+                    <input value="5" type="number" id="inputLongitud" placeholder="Ej.: 5.6" step="0.1" min="1" max="9999" required> mts.
                     <span>Altura</span>
-                    <input type="number" id="inputAltura" placeholder="Ej.: 2.3" step="0.1" min="1" max="9999" required> mts.
+                    <input value="2" type="number" id="inputAltura" placeholder="Ej.: 2.3" step="0.1" min="1" max="9999" required> mts.
                 </section>
         
                 <section class="cementos">
@@ -65,14 +65,14 @@
 
                 <section class="calcular">
                     <div class="btn-calcular">
-                        <!-- <button id="botonCalcular">Calcular</button>
-                        <button id="botonBorrar">Reset</button> -->
-                        <input type="button" value="Calcular" id="botonCalcular">
-                        <input type="reset" value="Reset" id="botonBorrar">
+                        <button id="botonCalcular">Calcular</button>
+                        <button id="botonReset">Reset</button>
+                        <!-- <input type="button" value="Calcular" id="botonCalcular">
+                        <input type="reset" value="Reset" id="botonBorrar"> -->
                     </div>
                 </section>
 
-            </form> 
+            </div> 
         </section>
 
     </div>

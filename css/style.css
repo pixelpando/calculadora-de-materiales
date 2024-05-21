@@ -105,6 +105,11 @@ input {
     border-radius: 5px;
     padding-left: 10px;
     border: 1px solid;
+}
+
+input[type="radio"] {
+    /* position: relative;
+    top: 200px; */
     cursor: pointer;
 }
 
@@ -153,7 +158,7 @@ nav {
     /* gap: 10px; */
 }
 
-.producto > img {
+.producto img {
     max-width: 70%;
 }
 
@@ -171,6 +176,7 @@ nav {
 label {
     display: block;
     height: 2.5rem;
+    cursor: pointer;
 }
 
 section.productos {
@@ -227,11 +233,11 @@ section.calcular {
     margin-top: 3rem;
 }
 
-#botonBorrar {
+#botonReset {
     background-color: #bb0000;
 }
 
-#botonBorrar:hover {
+#botonReset:hover {
     background-color: #d73030;
 }
 
