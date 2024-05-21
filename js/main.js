@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.68. Última Actualización: 21/05/2024';
+header[0].innerText = 'Calculadora de Materiales v0.69. Última Actualización: 21/05/2024';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
@@ -97,12 +97,6 @@ function actualizarData() {
             largoLadrillo = parseFloat(input.dataset.largo);
             nombreLadrillo = input.dataset.nombre;
             precioLadrillo = parseFloat(input.dataset.precio);
-
-            console.log(altoLadrillo);
-            console.log(anchoLadrillo);
-            console.log(largoLadrillo);
-            console.log(nombreLadrillo);
-            console.log(precioLadrillo);
         });
     });
 }
@@ -161,8 +155,7 @@ function tryAnalisis(longitud, altura) {
 
 
 // Funcion principal
-function calcularLadrillos() { 
-    console.log(altoLadrillo, anchoLadrillo, largoLadrillo, nombreLadrillo, precioLadrillo);
+function calcularLadrillos() {
     let longitud = document.getElementById('inputLongitud').value;
     let altura = document.getElementById('inputAltura').value;
     let bolsaCemento = document.getElementById('marcas-cemento').value;
