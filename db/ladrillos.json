@@ -6,8 +6,7 @@
         "imagen": "./images/1-ladrillo-comun-5x13x25.jpg",
         "alto": 0.05,
         "ancho": 0.13,
-        "largo": 0.25,
-        "checked": "checked"
+        "largo": 0.25
     },
     {
         "id": 2,
@@ -61,6 +60,7 @@
         "imagen": "./images/7-ladrillo-retak-10x25x50.jpg",
         "alto": 0.10,
         "ancho": 0.25,
-        "largo": 0.50
+        "largo": 0.50,
+        "checked": "checked"
     }
 ]

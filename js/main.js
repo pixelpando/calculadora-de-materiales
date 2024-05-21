@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.65. Última Actualización: 21/05/2024';
+header[0].innerText = 'Calculadora de Materiales v0.68. Última Actualización: 21/05/2024';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
@@ -9,11 +9,13 @@ msgDesperdicio.innerHTML = '<i class="fa-solid fa-triangle-exclamation fa-lg"></
 const botonCerrar = document.getElementById('cerrar');
 const mensaje = document.getElementById('msg');
 
+// Boton cerrar mensaje
 botonCerrar.addEventListener('click', () => {
     mensaje.className = 'ocultar';
     sessionStorage.setItem('msgAtencion', 'ocultar');
 });
 
+// Oculta el mensaje
 document.addEventListener('DOMContentLoaded', () => {
     const msgAtencion = sessionStorage.getItem('msgAtencion');
     if (msgAtencion === 'ocultar') {
@@ -21,24 +23,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Impide agregar números negativos y numeros muy altos en los inputs
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('.inputs input[type="number"]');
 
-//Bolsa de 50 kg.
+    inputs.forEach(input => {
+      input.addEventListener('input', () => {
+        if (input.value < 1) {
+          input.value = 1;
+        } else if (input.value > 999) {
+            input.value = 999;
+        }
+      });
+    });
+  });
+
+
+// Bolsa de 50 kg.
 let cemento = 50;
+let cementoPrecio = 8450;
 
-//Coeficiente de desperdicio (5%)
+// Coeficiente de desperdicio (5%)
 let desperdicio = 1.05;
 
-//Espesor del mortero en mts.
+// Espesor del mortero en mts.
 let junta = 0.015;
 
-// Declaracion de variables globales y medidas de referencia en mts.
-let altoLadrillo = ''; //0.12
-let anchoLadrillo = ''; //0.18
-let largoLadrillo = ''; //0.33
-let nombreLadrillo = ''; // Ladrillo Hueco 6A 12x18x33 (Default)
-let precioLadrillo = ''; // 446
+// Declaracion de variables globales
+let altoLadrillo  = '';
+let anchoLadrillo = '';
+let largoLadrillo = '';
+let nombreLadrillo = '';
+let precioLadrillo = '';
 
-//Sectores de contenido en el HTML
+// Sectores de contenido en el HTML
 let productsContainer = document.getElementById('products-container');
 let marcasContainer = document.getElementById('marcas-cemento');
 
@@ -53,7 +71,7 @@ fetch('../db/ladrillos.json')
         largoLadrillo = producto.largo;
         nombreLadrillo = producto.nombre;
         precioLadrillo = producto.precio;
-        // console.log(altoLadrillo, anchoLadrillo, largoLadrillo, nombreLadrillo, precioLadrillo);
+
         const card = document.createElement('div');
         card.classList.add('producto');
         card.innerHTML = `<label for="${producto.id}">
@@ -100,9 +118,7 @@ const obtenerMarcasCementos = async () => {
         let response = await solicitud.json();
 
         response.forEach(marcaCemento => {
-            // let marcasContainer = document.getElementById('marcas-cemento');
             renderizado += `<option value="${marcaCemento.value}">${marcaCemento.nombre}</option>`;
-            // marcasContainer = renderizado;
         })
 
     } catch(err) {
@@ -144,7 +160,7 @@ function tryAnalisis(longitud, altura) {
 }
 
 
-//Funcion principal
+// Funcion principal
 function calcularLadrillos() { 
     console.log(altoLadrillo, anchoLadrillo, largoLadrillo, nombreLadrillo, precioLadrillo);
     let longitud = document.getElementById('inputLongitud').value;
@@ -162,23 +178,37 @@ function calcularLadrillos() {
     let juntaLateral = junta * altoLadrillo * anchoLadrillo;
     let juntaTotal = (juntaSuperior + juntaLateral) * ladrillosCantidad;
 
-    //Relacion 1:3 - 454 Kg./m3 de cemento
+    // Relacion 1:3 - 454 Kg./m3 de cemento
     let dosificacionMortero = 454;
     let cementoBolsas = dosificacionMortero * juntaTotal * desperdicio / cemento;
 
-    //Redondeo de valores
+    // Redondeo de valores
     resultadoPared = Math.round(resultadoPared);
     ladrillosCantidad = Math.round(ladrillosCantidad);
     cementoBolsas = Math.ceil(cementoBolsas);
+
+    // Precio subtotal
+    let subtotal = ladrillosCantidad * precioLadrillo;
+
+    // Cementos total
+    let cementoTotal = cementoPrecio * cementoBolsas;
+
+    // Calculo total en $
+    let totalFinal = subtotal + cementoTotal;
     
     let resultadoCalculo = `<div class="resultado-final">
                             <h4>- RESULTADOS -</h4>
                             <p>Producto: <strong>${nombreLadrillo}</strong></p>
                             <p>Superficie de pared: <strong>${resultadoPared} m<sup>2</sup></strong></p>
                             <p>Cantidad: <strong>${ladrillosCantidad} unid.</strong></p>
-                            <p>Precio: <strong>$ ${precioLadrillo}</strong></p>
+                            <p>Precio por unidad: <strong>$ ${precioLadrillo} c/u.</strong></p>
+                            <p>Ladrillos (subtotal): <strong>$ ${subtotal}</strong></p>
                             <p>Marca de cemento: <strong>${bolsaCemento}</strong></p>
                             <p>Cantidad de bolsas: <strong>${cementoBolsas} unid. de 50 kg.</strong></p>
+                            <p>Precio de bolsa: <strong>$ ${cementoPrecio} c/u.</strong></p>
+                            <p>Cemento (subtotal): <strong>$ ${cementoTotal}</strong></p>
+                            <hr>
+                            <p class="total-final">TOTAL: <strong>$ ${totalFinal}</strong></p>
                             <button class="agregar-carrito" id="agregarAlCarrito">Agregar al Carrito</button>
                             </div>`;
 
