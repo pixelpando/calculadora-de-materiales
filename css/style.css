@@ -309,6 +309,17 @@ section.calcular {
     color: #fff;
 }
 
+.agregar-carrito:disabled {
+    color: #333;
+    background-color: #667;
+    cursor: initial;
+}
+
 .total-final {
     font-size: 24px;
+}
+
+.seccion-carrito {
+    margin-top: 3rem;
+    margin-bottom: 6rem;
 }

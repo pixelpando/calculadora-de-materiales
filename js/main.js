@@ -137,7 +137,7 @@ function tryAnalisis(longitud, altura) {
             analisis = 'El cálculo se realizó correctamente'; 
         } else {
             analisisResultado.classList.add('mensaje','error');
-            throw new Error('Ingrese las medidas correctas para realizar el cálculo.');
+            throw new Error('Por favor, ingrese las medidas correctas para realizar el cálculo.');
         }
 
     } catch(err) {
@@ -208,6 +208,24 @@ function calcularLadrillos() {
     const resultado = document.getElementById('resultado');
     resultado.innerHTML = resultadoCalculo;
 
+    let botonAgregarCarrito = document.getElementById('agregarAlCarrito');
+    if (totalFinal === 0) {
+        botonAgregarCarrito.setAttribute('disabled', 'true');
+    }
+
+    function addtoCartButton() {
+        let addButton = document.querySelector('#agregarAlCarrito')
+        addButton.onclick = () => {
+            localStorage.setItem('producto', nombreLadrillo)
+            localStorage.setItem('cantidad', ladrillosCantidad)
+            localStorage.setItem('subtotal', subtotal)
+            localStorage.setItem('marcaCemento', bolsaCemento)
+            localStorage.setItem('cantidadCemento', cementoBolsas)
+            localStorage.setItem('subtotalCemento', cementoTotal)
+            localStorage.setItem('total', totalFinal)
+        }
+    }
+
     tryAnalisis(longitud, altura);
 }
 
@@ -229,6 +247,12 @@ botonReset.addEventListener('click', () => {
     mensajeAnalisis.innerText = '';
     mensajeAnalisis.classList.remove('mensaje','error','correcto','ocultar-anim');
 });
+
+
+// LocalStorage
+localStorage.setItem('saludo', 'bienvenidos')
+localStorage.setItem('comision', 60465)
+localStorage.setItem('aprobado' , true)
 
 
 // Footer
