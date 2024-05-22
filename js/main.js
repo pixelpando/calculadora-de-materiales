@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.69. Última Actualización: 21/05/2024';
+header[0].innerText = 'Calculadora de Materiales v0.74. Última Actualización: 21/05/2024';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Impide agregar números negativos y numeros muy altos en los inputs
+// Impide agregar números negativos, numeros muy altos y hasta 2 decimales en los inputs
 document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('.inputs input[type="number"]');
 
@@ -31,8 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
       input.addEventListener('input', () => {
         if (input.value < 1) {
           input.value = 1;
-        } else if (input.value > 999) {
-            input.value = 999;
+        } else if (input.value > 9999) {
+            input.value = 9999;
+        }
+
+        const regex = /^\d+(\.\d{0,2})?$/;
+        if (!regex.test(input.value)) {
+            input.value = parseFloat(input.value).toFixed(2);
         }
       });
     });
@@ -132,7 +137,7 @@ function tryAnalisis(longitud, altura) {
     let analisis = '';
     let analisisResultado = document.getElementById('analisis-resultado');
     try {
-        if (longitud > 0 || altura > 0) {
+        if (longitud >= 1 && altura >= 1) {
             analisisResultado.classList.add('mensaje','correcto');
             analisis = 'El cálculo se realizó correctamente'; 
         } else {
@@ -180,14 +185,14 @@ function calcularLadrillos() {
     ladrillosCantidad = Math.round(ladrillosCantidad);
     cementoBolsas = Math.ceil(cementoBolsas);
 
-    // Precio subtotal
-    let subtotal = ladrillosCantidad * precioLadrillo;
+    // Ladrillos subtotal
+    let ladrilloTotal = ladrillosCantidad * precioLadrillo;
 
     // Cementos total
     let cementoTotal = cementoPrecio * cementoBolsas;
 
     // Calculo total en $
-    let totalFinal = subtotal + cementoTotal;
+    let totalFinal = ladrilloTotal + cementoTotal;
     
     let resultadoCalculo = `<div class="resultado-final">
                             <h4>- RESULTADOS -</h4>
@@ -195,7 +200,7 @@ function calcularLadrillos() {
                             <p>Superficie de pared: <strong>${resultadoPared} m<sup>2</sup></strong></p>
                             <p>Cantidad: <strong>${ladrillosCantidad} unid.</strong></p>
                             <p>Precio por unidad: <strong>$ ${precioLadrillo} c/u.</strong></p>
-                            <p>Ladrillos (subtotal): <strong>$ ${subtotal}</strong></p>
+                            <p>Ladrillos (subtotal): <strong>$ ${ladrilloTotal}</strong></p>
                             <p>Marca de cemento: <strong>${bolsaCemento}</strong></p>
                             <p>Cantidad de bolsas: <strong>${cementoBolsas} unid. de 50 kg.</strong></p>
                             <p>Precio de bolsa: <strong>$ ${cementoPrecio} c/u.</strong></p>
@@ -208,23 +213,29 @@ function calcularLadrillos() {
     const resultado = document.getElementById('resultado');
     resultado.innerHTML = resultadoCalculo;
 
-    let botonAgregarCarrito = document.getElementById('agregarAlCarrito');
+    const botonAgregarCarrito = document.getElementById('agregarAlCarrito');
     if (totalFinal === 0) {
         botonAgregarCarrito.setAttribute('disabled', 'true');
     }
 
     function addtoCartButton() {
-        let addButton = document.querySelector('#agregarAlCarrito')
-        addButton.onclick = () => {
-            localStorage.setItem('producto', nombreLadrillo)
-            localStorage.setItem('cantidad', ladrillosCantidad)
-            localStorage.setItem('subtotal', subtotal)
-            localStorage.setItem('marcaCemento', bolsaCemento)
-            localStorage.setItem('cantidadCemento', cementoBolsas)
-            localStorage.setItem('subtotalCemento', cementoTotal)
-            localStorage.setItem('total', totalFinal)
+        botonAgregarCarrito.onclick = () => {
+            let cartInfo = [nombreLadrillo, ladrillosCantidad, ladrilloTotal, bolsaCemento, cementoBolsas, cementoTotal, totalFinal];
+            localStorage.setItem('cartInfo', JSON.stringify(cartInfo));
+            
+            // localStorage.setItem('producto', nombreLadrillo);
+            // localStorage.setItem('cantidad', ladrillosCantidad);
+            // localStorage.setItem('ladrilloTotal', ladrilloTotal);
+            // localStorage.setItem('marca', bolsaCemento);
+            // localStorage.setItem('bolsas', cementoBolsas);
+            // localStorage.setItem('cementoTotal', cementoTotal);
+
+            // localStorage.setItem('ladrillo', arrayLadrillo);
+            // localStorage.setItem('cemento', arrayCemento);
+            // localStorage.setItem('total', totalFinal);
         }
     }
+    addtoCartButton()
 
     tryAnalisis(longitud, altura);
 }
@@ -247,12 +258,6 @@ botonReset.addEventListener('click', () => {
     mensajeAnalisis.innerText = '';
     mensajeAnalisis.classList.remove('mensaje','error','correcto','ocultar-anim');
 });
-
-
-// LocalStorage
-localStorage.setItem('saludo', 'bienvenidos')
-localStorage.setItem('comision', 60465)
-localStorage.setItem('aprobado' , true)
 
 
 // Footer

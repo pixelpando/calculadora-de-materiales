@@ -1,39 +1,41 @@
-// let cartStorage = localStorage.getItem('cartProductos');
-// cartStorage = JSON.parse(cartStorage);
+// Recuperar info del localStorage
+let cartStorage = localStorage.getItem('cartInfo');
+cartStorage = JSON.parse(cartStorage);
+console.log(cartStorage);
 
-// let cartContainer = document.getElementById('cart-section');
+let cartSection = document.getElementById('cart-section');
 
-// function renderCarrito(cartItems) {
-//     cartItems.forEach(producto => {
-//         const cart = document.createElement('div');
-//         cart.innerHTML = `<h3>${producto.nombre}</h3>
-//                           <p>${producto.precio}</p>`
-//         cartContainer.appendChild(cart);
-//     });
-// }
-// renderCarrito();
-
-
-// let comision = localStorage.getItem('comision');
-// console.log(comision);
-// let saludo = localStorage.getItem('saludo');
-// console.log(saludo);
-// let aprobado = localStorage.getItem('aprobado');
-// console.log(aprobado);
-
-
-for (let i = 0; i < localStorage.length; i++) {
-    let clave = localStorage.key(i)
-    console.log('Clave: ', clave, 'valor: ', localStorage.getItem(clave))
+function renderProductos() {
+    const cardProduct = document.createElement('div');
+    cardProduct.classList.add('card-producto')
+    cardProduct.innerHTML = `<div>
+                            <span>Producto</span>
+                            <span>Cantidad</span>
+                            <span>Precio (subtotal)</span>
+                            <span>Modificar</span>
+                            </div>
+                             <div>
+                             <span>${cartStorage[0]}</span>
+                             <span>${cartStorage[1]} unid.</span>
+                             <span>$ ${cartStorage[2]}</span>
+                             <button id="btnBorrarProducto">Borrar</button>
+                             </div>
+                             <div>
+                             <span>Cemento ${cartStorage[3]}</span>
+                             <span>${cartStorage[4]} unid.</span>
+                             <span>$ ${cartStorage[5]}</span>
+                             <button id="btnBorrarProducto">Borrar</button>
+                             </div>
+                             <section>
+                             <span class="total">Total: <strong>$ ${cartStorage[6]}</strong></span>
+                             </section>
+                             <section>
+                             <button id="btnBorrarTodo">Borrar todo</button>
+                             </section>`;
+    cartSection.appendChild(cardProduct)
 }
 
-
-// let cartSection = document.getElementById('cart-section');
-// cartSection.innerHTML = `<p>Comision: ${comision}</p>
-//                          <p>Saludo: ${saludo}</p>
-//                          <p>Aprobado: ${aprobado}</p>
-//                          <button id="btnBorrarProducto">Borrar</button>
-//                          <button id="btnBorrarTodo">Borrar todo</button>`;
+renderProductos();
 
 // // Boton Borrar Producto
 // let btnBorrarProducto = document.getElementById('btnBorrarProducto');
