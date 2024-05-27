@@ -38,8 +38,9 @@ a {
     text-decoration: none;
 }
 
-a:hover {
+a:hover:not(.carrito-icon a) {
     color: #334;
+    background-color: #f6f6f6;
 }
 
 a.volver {
@@ -361,4 +362,35 @@ section.calcular {
     display: inline-block;
     font-size: 22px;
     margin: 1rem;
+}
+
+.vaciar-carrito {
+    font-size: 16px;
+    color: #d00;
+    border: 1px solid #d00;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.vaciar-carrito:hover {
+    color: #334;
+    border-color: #334;
+    background-color: #f6f6f6;
+}
+
+.borrar-producto {
+    color: #eee;
+    border: 1px solid #eee;
+    background-color: #c33;
+    padding: .3rem .6rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.borrar-producto:hover {
+    color: #f6f6f6;
+    border-color: #334;
+    background-color: #334;
 }

@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.74. Última Actualización: 21/05/2024';
+header[0].innerText = 'Calculadora de Materiales v0.75. Última Actualización: 24/05/2024';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
@@ -67,7 +67,7 @@ let marcasContainer = document.getElementById('marcas-cemento');
 
 
 // Fetch para llamar a los Ladrillos
-fetch('../db/ladrillos.json')
+fetch('./db/ladrillos.json')
 .then(response => response.json())
 .then(data => {
     data.forEach(producto => {
@@ -108,7 +108,7 @@ function actualizarData() {
 
 // Async con Try-Catch-Finally para llamar a las marcas de cemento
 const obtenerMarcasCementos = async () => {
-    let URL = '../db/cementos.json';
+    let URL = './db/cementos.json';
     const marcaError = `<option disabled>ERROR. No se pudo cargar las marcas, intente más tarde.</option>`;
     let renderizado = ``;
 
@@ -222,17 +222,6 @@ function calcularLadrillos() {
         botonAgregarCarrito.onclick = () => {
             let cartInfo = [nombreLadrillo, ladrillosCantidad, ladrilloTotal, bolsaCemento, cementoBolsas, cementoTotal, totalFinal];
             localStorage.setItem('cartInfo', JSON.stringify(cartInfo));
-            
-            // localStorage.setItem('producto', nombreLadrillo);
-            // localStorage.setItem('cantidad', ladrillosCantidad);
-            // localStorage.setItem('ladrilloTotal', ladrilloTotal);
-            // localStorage.setItem('marca', bolsaCemento);
-            // localStorage.setItem('bolsas', cementoBolsas);
-            // localStorage.setItem('cementoTotal', cementoTotal);
-
-            // localStorage.setItem('ladrillo', arrayLadrillo);
-            // localStorage.setItem('cemento', arrayCemento);
-            // localStorage.setItem('total', totalFinal);
         }
     }
     addtoCartButton()
