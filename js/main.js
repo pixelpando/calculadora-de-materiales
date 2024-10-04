@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.75. Última Actualización: 24/05/2024';
+header[0].innerText = 'Calculadora de Materiales v0.76. Última Actualización: 04/10/2024';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
@@ -29,8 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     inputs.forEach(input => {
       input.addEventListener('input', () => {
-        if (input.value < 1) {
-          input.value = 1;
+        if (isNaN(input.value) || (input.value == '')) {
+            input.value = '';
+            return;
+        }
+        
+        if (input.value < 0) {
+          input.value = 0;
         } else if (input.value > 9999) {
             input.value = 9999;
         }
@@ -67,7 +72,7 @@ let marcasContainer = document.getElementById('marcas-cemento');
 
 
 // Fetch para llamar a los Ladrillos
-fetch('./db/ladrillos.json')
+fetch('../db/ladrillos.json')
 .then(response => response.json())
 .then(data => {
     data.forEach(producto => {
@@ -158,7 +163,7 @@ function tryAnalisis(longitud, altura) {
     }
 }
 
-
+let longitud = document.getElementById('inputLongitud').value;
 // Funcion principal
 function calcularLadrillos() {
     let longitud = document.getElementById('inputLongitud').value;
@@ -235,6 +240,15 @@ botonCalcular.addEventListener('click', () => {
     calcularLadrillos();
 });
 
+// botonCalcular.addEventListener('click', () => {
+//     if (longitud === 0 || altura === 0) {
+//         resultadoFinal.innerHTML = '';
+//     }
+//     else {
+//         calcularLadrillos();
+//     }
+// });
+
 // Boton Reset
 let botonReset = document.getElementById('botonReset');
 botonReset.addEventListener('click', () => {
@@ -242,6 +256,7 @@ botonReset.addEventListener('click', () => {
     if (resultadoFinal === null) {
         } else {
         resultadoFinal.remove();
+        longitud = '';
     }
     let mensajeAnalisis = document.querySelector('#analisis-resultado');
     mensajeAnalisis.innerText = '';
