@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.76. Última Actualización: 04/10/2024';
+header[0].innerText = 'Calculadora de Materiales v0.77. Última Actualización: 03/01/2025';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
