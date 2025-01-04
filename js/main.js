@@ -1,6 +1,6 @@
 // Header
 let header = document.getElementsByTagName('header');
-header[0].innerText = 'Calculadora de Materiales v0.77. Última Actualización: 03/01/2025';
+header[0].innerText = 'Calculadora de Materiales v0.79. Última Actualización: 03/01/2025';
 
 // Mensaje de advertencia
 let msgDesperdicio = document.getElementById('msg');
@@ -72,7 +72,7 @@ let marcasContainer = document.getElementById('marcas-cemento');
 
 
 // Fetch para llamar a los Ladrillos
-fetch('../db/ladrillos.json')
+fetch('./db/ladrillos.json')
 .then(response => response.json())
 .then(data => {
     data.forEach(producto => {
